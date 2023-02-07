@@ -8,6 +8,10 @@ router.get('/signup', (req, res) => {
   res.render('auth/signup')
 })
 
+router.get('/private', (req, res) => {
+    res.render('auth/private')
+  })
+
 router.post('/signup', async (req, res) => {
   const body = { ...req.body }
 
