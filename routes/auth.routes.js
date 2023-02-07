@@ -29,7 +29,7 @@ router.post('/signup', async (req, res) => {
       if (error.code === 11000) {
         console.log('Duplicate !')
         res.render('auth/signup', {
-          errorMessage: 'Username already used !',
+          errorMessage: 'Username already used! Click LogIn!',
           userData: req.body,
         })
       } else {
