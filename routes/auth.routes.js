@@ -23,8 +23,8 @@ router.post('/signup', async (req, res) => {
 
     try {
       await User.create(body)
-     // res.send(body)
-     res.render("profile")
+     //res.send(body)
+   res.render("profile")
     } catch (error) {
       if (error.code === 11000) {
         console.log('Duplicate !')
@@ -47,7 +47,7 @@ router.get('/login', (req, res) => {
 })
 
 router.post('/login', async (req, res) => {
-  console.log('SESSION =====> ', req.session)
+
   const body = req.body
 
   const userMatch = await User.find({ username: body.username })
@@ -58,8 +58,15 @@ router.post('/login', async (req, res) => {
 
     if (bcrypt.compareSync(body.password, user.passwordHash)) {
       // Correct password
-      console.log(user)
-      res.render('profile', { user })
+      //console.log(user)
+      //res.render('profile', { user })
+      const tempUser = {
+        username: user.username,
+        email: user.email,
+      }
+      req.session.user = tempUser
+      res.redirect('/profile')    //CHECK THE PROFILE ROUTE!!!!
+
     } else {
       // Incorrect password
     }
